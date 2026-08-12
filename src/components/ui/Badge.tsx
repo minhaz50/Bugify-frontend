@@ -1,23 +1,19 @@
-import clsx from 'clsx';
 import { IssueStatus, IssueType } from '@/types';
 
 export function TypeBadge({ type }: { type: IssueType }) {
   return (
-    <span className={clsx(type === 'bug' ? 'badge-bug' : 'badge-feature')}>
-      {type === 'bug' ? '🐛 Bug' : '✨ Feature Request'}
+    <span className={type === 'bug' ? 'badge-bug' : 'badge-feature'}>
+      {type === 'bug' ? '🐛 Bug' : '✨ Feature'}
     </span>
   );
 }
 
 export function StatusBadge({ status }: { status: IssueStatus }) {
-  const labels: Record<IssueStatus, string> = {
-    open: '🟡 Open',
-    in_progress: '🟣 In Progress',
-    resolved: '🟢 Resolved',
+  const map: Record<IssueStatus, { label: string; cls: string }> = {
+    open:        { label: '🟡 Open',        cls: 'badge-open' },
+    in_progress: { label: '🟣 In Progress', cls: 'badge-in_progress' },
+    resolved:    { label: '🟢 Resolved',    cls: 'badge-resolved' },
   };
-  return (
-    <span className={clsx(`badge-${status}`)}>
-      {labels[status]}
-    </span>
-  );
+  const { label, cls } = map[status];
+  return <span className={cls}>{label}</span>;
 }

@@ -1,16 +1,13 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import api from '@/lib/api';
 import { Issue } from '@/types';
-import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import IssueForm from '@/components/issues/IssueForm';
-import Spinner from '@/components/ui/Spinner';
 import { useAuth } from '@/context/AuthContext';
 import toast from 'react-hot-toast';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Pencil } from 'lucide-react';
 
 export default function EditIssuePage() {
   const { id } = useParams();
@@ -23,19 +20,16 @@ export default function EditIssuePage() {
   useEffect(() => {
     api.get(`/issues/${id}`)
       .then(({ data }) => {
-        const issue = data.data;
-        const canEdit = isMaintainer || (issue.reporter?.id === user?.id && issue.status === 'open');
+        const iss = data.data;
+        const canEdit = isMaintainer || (iss.reporter?.id === user?.id && iss.status === 'open');
         if (!canEdit) {
           toast.error('You are not allowed to edit this issue');
           router.push(`/issues/${id}`);
           return;
         }
-        setIssue(issue);
+        setIssue(iss);
       })
-      .catch(() => {
-        toast.error('Issue not found');
-        router.push('/issues');
-      })
+      .catch(() => { toast.error('Issue not found'); router.push('/issues'); })
       .finally(() => setLoading(false));
   }, [id]);
 
@@ -53,24 +47,30 @@ export default function EditIssuePage() {
   };
 
   return (
-    <ProtectedRoute>
-      <div className="max-w-2xl mx-auto space-y-6">
-        <Link href={`/issues/${id}`} className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Issue
-        </Link>
+    <div className="max-w-2xl mx-auto space-y-6">
+      <Link href={`/issues/${id}`} className="inline-flex items-center gap-2 text-sm text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
+        <ArrowLeft className="w-4 h-4" /> Back to Issue
+      </Link>
 
-        {loading ? (
-          <Spinner className="h-64" />
-        ) : issue ? (
-          <div className="card p-8">
-            <div className="mb-6">
-              <h1 className="text-xl font-bold text-gray-900">Edit Issue</h1>
-              <p className="text-gray-500 text-sm mt-1 truncate">#{issue.id} — {issue.title}</p>
+      {loading ? (
+        <div className="space-y-4">
+          <div className="skeleton h-64" />
+          <div className="skeleton h-40" />
+        </div>
+      ) : issue ? (
+        <div className="card p-8">
+          <div className="flex items-center gap-3 mb-6 pb-5 border-b border-slate-100 dark:border-slate-700">
+            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+              <Pencil className="w-5 h-5 text-blue-600 dark:text-blue-400" />
             </div>
-            <IssueForm initial={issue} onSubmit={handleSubmit} loading={submitting} submitLabel="Save Changes" />
+            <div>
+              <h1 className="text-lg font-extrabold text-slate-900 dark:text-white">Edit Issue</h1>
+              <p className="text-sm text-slate-400 truncate max-w-xs">#{issue.id} — {issue.title}</p>
+            </div>
           </div>
-        ) : null}
-      </div>
-    </ProtectedRoute>
+          <IssueForm initial={issue} onSubmit={handleSubmit} loading={submitting} submitLabel="Save Changes" />
+        </div>
+      ) : null}
+    </div>
   );
 }

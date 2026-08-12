@@ -1,23 +1,16 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/context/AuthContext";
-import {
-  Zap,
-  LayoutDashboard,
-  Bug,
-  LogOut,
-  User,
-  PlusCircle,
-} from "lucide-react";
-import clsx from "clsx";
-import toast from "react-hot-toast";
+import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
+import { useAuth } from '@/context/AuthContext';
+import { Zap, LayoutDashboard, Bug, LogOut, User, PlusCircle } from 'lucide-react';
+import clsx from 'clsx';
+import toast from 'react-hot-toast';
 
 const navLinks = [
-  { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-  { href: "/issues", label: "Issues", icon: Bug },
-  { href: "/profile", label: "Profile", icon: User },
+  { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { href: '/issues', label: 'Issues', icon: Bug },
+  { href: '/profile', label: 'Profile', icon: User },
 ];
 
 export default function Navbar() {
@@ -27,8 +20,8 @@ export default function Navbar() {
 
   const handleLogout = () => {
     logout();
-    toast.success("Logged out successfully");
-    router.push("/auth/login");
+    toast.success('Logged out successfully');
+    router.push('/auth/login');
   };
 
   if (!isAuthenticated) return null;
@@ -42,7 +35,7 @@ export default function Navbar() {
             <div className="bg-brand-600 p-1.5 rounded-lg">
               <Zap className="w-5 h-5 text-white" />
             </div>
-            <span className="font-bold text-xl text-gray-900">Bugify</span>
+            <span className="font-bold text-xl text-gray-900">DevPulse</span>
           </Link>
 
           {/* Nav Links */}
@@ -52,10 +45,10 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 className={clsx(
-                  "flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors",
+                  'flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                   pathname.startsWith(href)
-                    ? "bg-brand-50 text-brand-700"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900",
+                    ? 'bg-brand-50 text-brand-700'
+                    : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
                 )}
               >
                 <Icon className="w-4 h-4" />
@@ -66,10 +59,7 @@ export default function Navbar() {
 
           {/* Right side */}
           <div className="flex items-center gap-3">
-            <Link
-              href="/issues/create"
-              className="btn-primary flex items-center gap-2 text-sm"
-            >
+            <Link href="/issues/create" className="btn-primary flex items-center gap-2 text-sm">
               <PlusCircle className="w-4 h-4" />
               <span className="hidden sm:inline">New Issue</span>
             </Link>
@@ -80,12 +70,8 @@ export default function Navbar() {
                   <User className="w-4 h-4 text-brand-600" />
                 </div>
                 <div className="hidden md:block">
-                  <p className="text-sm font-medium text-gray-900 leading-none">
-                    {user?.name}
-                  </p>
-                  <p className="text-xs text-gray-500 capitalize mt-0.5">
-                    {user?.role}
-                  </p>
+                  <p className="text-sm font-medium text-gray-900 leading-none">{user?.name}</p>
+                  <p className="text-xs text-gray-500 capitalize mt-0.5">{user?.role}</p>
                 </div>
               </div>
               <button
