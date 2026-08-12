@@ -1,24 +1,28 @@
-'use client';
-import { useState } from 'react';
-import { usePathname } from 'next/navigation';
-import ProtectedRoute from '@/components/layout/ProtectedRoute';
-import Sidebar from '@/components/dashboard/Sidebar';
-import DashboardNavbar from '@/components/dashboard/DashboardNavbar';
+"use client";
+import { useState } from "react";
+import { usePathname } from "next/navigation";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
+import Sidebar from "@/components/dashboard/Sidebar";
+import DashboardNavbar from "@/components/dashboard/DashboardNavbar";
 
 const pageTitles: Record<string, string> = {
-  '/dashboard': 'Overview',
-  '/dashboard/analytics': 'Analytics',
-  '/dashboard/users': 'Manage Users',
-  '/dashboard/settings': 'Settings',
-  '/profile': 'My Profile',
-  '/issues': 'Issues',
-  '/issues/create': 'New Issue',
+  "/dashboard": "Overview",
+  "/dashboard/analytics": "Analytics",
+  "/dashboard/users": "Manage Users",
+  "/dashboard/settings": "Settings",
+  "/profile": "My Profile",
+  "/issues": "Issues",
+  "/issues/create": "New Issue",
 };
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
-  const title = pageTitles[pathname] || 'DevPulse';
+  const title = pageTitles[pathname] || "Bugify";
 
   return (
     <ProtectedRoute>
@@ -31,7 +35,10 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {/* Mobile sidebar overlay */}
         {sidebarOpen && (
           <div className="lg:hidden fixed inset-0 z-50 flex">
-            <div className="fixed inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
+            <div
+              className="fixed inset-0 bg-black/50"
+              onClick={() => setSidebarOpen(false)}
+            />
             <div className="relative z-10">
               <Sidebar onClose={() => setSidebarOpen(false)} />
             </div>
@@ -40,10 +47,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
 
         {/* Main content */}
         <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-          <DashboardNavbar onMenuClick={() => setSidebarOpen(true)} title={title} />
-          <main className="flex-1 overflow-y-auto p-6">
-            {children}
-          </main>
+          <DashboardNavbar
+            onMenuClick={() => setSidebarOpen(true)}
+            title={title}
+          />
+          <main className="flex-1 overflow-y-auto p-6">{children}</main>
         </div>
       </div>
     </ProtectedRoute>

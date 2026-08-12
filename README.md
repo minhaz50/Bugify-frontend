@@ -1,19 +1,19 @@
 # Bugify – Frontend
 
-Next.js + Tailwind CSS frontend for the DevPulse issue tracker.
+Next.js + Tailwind CSS frontend for the Bugify issue tracker.
 
 ## Pages
 
-| Route | Description | Access |
-|---|---|---|
-| `/auth/login` | Sign in | Public |
-| `/auth/signup` | Create account | Public |
-| `/dashboard` | Stats & charts overview | Authenticated |
-| `/issues` | Issues list with filters | Authenticated |
-| `/issues/create` | Create new issue | Authenticated |
-| `/issues/:id` | Issue detail | Authenticated |
-| `/issues/:id/edit` | Edit issue | Authenticated (with permissions) |
-| `/profile` | View account info | Authenticated |
+| Route              | Description              | Access                           |
+| ------------------ | ------------------------ | -------------------------------- |
+| `/auth/login`      | Sign in                  | Public                           |
+| `/auth/signup`     | Create account           | Public                           |
+| `/dashboard`       | Stats & charts overview  | Authenticated                    |
+| `/issues`          | Issues list with filters | Authenticated                    |
+| `/issues/create`   | Create new issue         | Authenticated                    |
+| `/issues/:id`      | Issue detail             | Authenticated                    |
+| `/issues/:id/edit` | Edit issue               | Authenticated (with permissions) |
+| `/profile`         | View account info        | Authenticated                    |
 
 ## Setup
 

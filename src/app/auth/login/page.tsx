@@ -47,8 +47,8 @@ export default function LoginPage() {
 
   const fillDemo = (role: "contributor" | "maintainer") => {
     const creds = {
-      contributor: { email: "alice@devpulse.com", password: "123456" },
-      maintainer: { email: "admin@devpulse.com", password: "123456" },
+      contributor: { email: "alice@Bugify.com", password: "123456" },
+      maintainer: { email: "admin@Bugify.com", password: "123456" },
     };
     setForm(creds[role]);
     setErrors({});
