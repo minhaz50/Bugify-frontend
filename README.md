@@ -1,4 +1,4 @@
-# DevPulse – Frontend
+# Bugify – Frontend
 
 Next.js + Tailwind CSS frontend for the DevPulse issue tracker.
 
