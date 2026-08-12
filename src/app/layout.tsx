@@ -1,18 +1,22 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from '@/context/AuthContext';
-import { ThemeProvider } from '@/context/ThemeContext';
-import './globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
+import { AuthProvider } from "@/context/AuthContext";
+import { ThemeProvider } from "@/context/ThemeContext";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'DevPulse – Issue Tracker',
-  description: 'Collaborative bug and feature tracking for software teams',
+  title: "Bugify – Issue Tracker",
+  description: "Collaborative bug and feature tracking for software teams",
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
@@ -23,8 +27,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               position="top-right"
               toastOptions={{
                 duration: 3500,
-                className: 'dark:bg-slate-800 dark:text-white',
-                style: { borderRadius: '12px', fontSize: '14px' },
+                className: "dark:bg-slate-800 dark:text-white",
+                style: { borderRadius: "12px", fontSize: "14px" },
               }}
             />
           </AuthProvider>
